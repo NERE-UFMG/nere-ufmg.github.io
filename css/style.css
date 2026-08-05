@@ -83,11 +83,6 @@ html.lang-pt [data-lang="en"] { display: none !important; }
 .logo-text { display: flex; flex-direction: column; line-height: 1.2; }
 .logo-cere { font-size: 1.7rem; font-weight: 700; letter-spacing: .07em; color: var(--navy); text-transform: uppercase; }
 .logo-name { font-size: .72rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: .09em; margin-top: .2rem; }
-.logo-univ {
-  font-size: .62rem; color: var(--gray-300);
-  text-transform: uppercase; letter-spacing: .07em;
-  border-top: 1px solid var(--gray-200); padding-top: .2rem; margin-top: .2rem;
-}
 .logo-institutional { display: flex; flex-direction: column; align-items: flex-start; gap: .32rem; }
 .logo-ufmg { height: 28px; width: auto; display: block; opacity: .85; }
 .logo-affiliates { display: flex; gap: .6rem; align-items: center; }
