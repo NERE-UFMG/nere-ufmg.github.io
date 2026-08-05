@@ -69,43 +69,39 @@ html.lang-pt [data-lang="en"] { display: none !important; }
    ============================================================ */
 .site-header { background: var(--white); position: sticky; top: 0; z-index: 500; box-shadow: 0 2px 8px rgba(0,0,0,.08); border-bottom: 3px solid var(--red); }
 .header-inner {
-  max-width: 1200px; margin: 0 auto; padding: .75rem 1.5rem;
-  display: flex; justify-content: space-between; align-items: center; gap: 1.5rem;
+  max-width: 1320px; margin: 0 auto; padding: .75rem 1.5rem;
+  display: flex; justify-content: space-between; align-items: center; gap: 1.25rem;
 }
 
 /* Logo */
-.site-logo { display: flex; align-items: center; gap: .9rem; color: var(--navy); flex-shrink: 0; text-decoration: none; }
+.site-logo { display: flex; align-items: center; gap: .8rem; color: var(--navy); flex-shrink: 0; text-decoration: none; }
 .logo-accent {
-  width: 4px; height: 44px;
+  width: 5px; height: 52px;
   background: linear-gradient(to bottom, var(--red), var(--red-dark));
-  border-radius: 2px; flex-shrink: 0;
+  border-radius: 3px; flex-shrink: 0;
 }
 .logo-text { display: flex; flex-direction: column; line-height: 1.2; }
-.logo-cere { font-size: 1.35rem; font-weight: 700; letter-spacing: .06em; color: var(--navy); text-transform: uppercase; }
-.logo-name { font-size: .67rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: .09em; margin-top: .15rem; }
-.logo-univ {
-  font-size: .62rem; color: var(--gray-300);
-  text-transform: uppercase; letter-spacing: .07em;
-  border-top: 1px solid var(--gray-200); padding-top: .2rem; margin-top: .2rem;
-}
+.logo-cere { font-size: 1.7rem; font-weight: 700; letter-spacing: .07em; color: var(--navy); text-transform: uppercase; }
+.logo-name { font-size: .72rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: .09em; margin-top: .2rem; }
 .logo-institutional { display: flex; flex-direction: column; align-items: flex-start; gap: .32rem; }
 .logo-ufmg { height: 28px; width: auto; display: block; opacity: .85; }
 .logo-affiliates { display: flex; gap: .6rem; align-items: center; }
 .logo-affiliate { height: 18px; width: auto; display: block; opacity: .72; }
 .logo-affiliate[alt="IPEAD"] { filter: brightness(0); opacity: .6; }
-.logo-divider { width: 1px; height: 48px; background: var(--gray-200); flex-shrink: 0; }
+.logo-divider { width: 1px; height: 54px; background: var(--gray-200); flex-shrink: 0; }
+.logo-cedeplar { height: 54px; width: auto; display: block; flex-shrink: 0; }
 
 /* Main Nav */
 .main-nav { display: flex; align-items: center; }
 .main-nav > ul { display: flex; }
 .main-nav > ul > li { position: relative; }
 .main-nav > ul > li > a {
-  display: block; padding: .55rem .82rem;
-  color: var(--gray-700); font-size: .82rem; font-weight: 600;
+  display: block; padding: .55rem .68rem;
+  color: var(--gray-700); font-size: .8rem; font-weight: 600;
   white-space: nowrap; transition: color var(--transition); position: relative;
 }
 .main-nav > ul > li > a::after {
-  content: ''; position: absolute; bottom: 0; left: .82rem; right: .82rem;
+  content: ''; position: absolute; bottom: 0; left: .68rem; right: .68rem;
   height: 2px; background: var(--red);
   transform: scaleX(0); transition: transform var(--transition);
 }
@@ -398,9 +394,19 @@ textarea.form-control { resize: vertical; min-height: 130px; }
    ============================================================ */
 .site-footer { background: var(--navy-dark); color: rgba(255,255,255,.65); }
 .footer-main { padding: 3.5rem 1.5rem; }
-.footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2.2fr 1fr 1fr 1fr; gap: 3rem; }
-.footer-brand .logo-cere { color: var(--white); font-size: 1.15rem; }
-.footer-brand .logo-name { font-size: .6rem; }
+.footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2.7fr 1fr 1fr 1fr; gap: 2.5rem; }
+.footer-brand .logo-cere { color: var(--white); font-size: 1.5rem; }
+.footer-brand .logo-name { font-size: .66rem; }
+.footer-brand-logos { display: flex; align-items: center; flex-wrap: wrap; gap: 1.25rem 1.5rem; }
+.footer-cedeplar {
+  display: flex; align-items: center; gap: .8rem;
+  padding-left: 1.5rem; border-left: 1px solid rgba(255,255,255,.15);
+}
+.footer-cedeplar-logo { height: 54px; width: auto; display: block; flex-shrink: 0; }
+.footer-cedeplar-name {
+  font-size: .74rem; line-height: 1.45; max-width: 19ch;
+  color: rgba(255,255,255,.55);
+}
 .footer-brand p { font-size: .83rem; margin-top: .9rem; line-height: 1.6; color: rgba(255,255,255,.55); }
 .footer-brand address { font-style: normal; font-size: .8rem; margin-top: .75rem; line-height: 1.7; color: rgba(255,255,255,.45); }
 .footer-col h4 { color: var(--white); font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 1rem; padding-bottom: .5rem; border-bottom: 1px solid rgba(255,255,255,.1); }
@@ -450,23 +456,33 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 /* ============================================================
    RESPONSIVE
    ============================================================ */
+/* Header lockup is wide (UFMG/FACE/IPEAD + Cedeplar + CERE): drop the
+   institutional block first so CERE and Cedeplar keep their prominence. */
+@media (max-width: 1280px) {
+  .logo-institutional,
+  .logo-institutional + .logo-divider { display: none; }
+}
+
+/* The horizontal nav no longer fits alongside the Cedeplar + CERE lockup
+   below this width, so it collapses into the hamburger here rather than
+   shrinking the logos the redesign is meant to highlight. */
 @media (max-width: 1024px) {
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
-  .main-nav > ul > li > a { padding: .55rem .6rem; font-size: .78rem; }
-}
-
-@media (max-width: 768px) {
+  .footer-cedeplar { padding-left: 0; border-left: none; }
   .main-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--white); border-top: 1px solid var(--gray-200); box-shadow: 0 8px 24px rgba(0,0,0,.1); flex-direction: column; padding: .5rem 0 1rem; }
   .main-nav.open { display: flex; }
   .main-nav > ul { flex-direction: column; width: 100%; }
-  .main-nav > ul > li > a { padding: .75rem 1.5rem; color: var(--gray-700); border-bottom: 1px solid var(--gray-100); }
+  .main-nav > ul > li > a { padding: .75rem 1.5rem; color: var(--gray-700); border-bottom: 1px solid var(--gray-100); font-size: .85rem; }
   .main-nav > ul > li > a::after { display: none; }
   .dropdown { position: static; box-shadow: none; border-top: none; border-left: 3px solid var(--red); margin-left: 1.5rem; background: var(--gray-50); }
   .has-dropdown.open .dropdown { display: block; }
   .hamburger { display: block; }
   .header-inner { position: relative; }
+}
+
+@media (max-width: 768px) {
   .grid-2, .grid-3 { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
   .hero { padding: 4.5rem 1.5rem 3.5rem; }
@@ -479,4 +495,9 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .hero h1 { font-size: 1.75rem; }
   .hero-cta { flex-direction: column; align-items: center; }
+  /* Narrowest screens: CERE alone in the header bar. */
+  .logo-cedeplar,
+  .logo-cedeplar + .logo-divider { display: none; }
+  .logo-cere { font-size: 1.45rem; }
+  .logo-name { font-size: .62rem; }
 }
