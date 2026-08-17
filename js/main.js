@@ -127,6 +127,71 @@
   });
 
   /* ----------------------------------------------------------
+     GALLERY CAROUSEL
+     ---------------------------------------------------------- */
+  document.querySelectorAll(".gallery-carousel").forEach(function (carousel) {
+    var track = carousel.querySelector(".gallery-carousel-track");
+    var slides = Array.prototype.slice.call(track.children);
+    var prevBtn = carousel.querySelector(".gallery-carousel-prev");
+    var nextBtn = carousel.querySelector(".gallery-carousel-next");
+    var dotsWrap = carousel.querySelector(".gallery-carousel-dots");
+    var counter = carousel.querySelector(".gallery-carousel-counter");
+    var current = 0;
+
+    var dots = slides.map(function (_, i) {
+      var dot = document.createElement("button");
+      dot.type = "button";
+      dot.setAttribute("aria-label", "Foto " + (i + 1));
+      dot.addEventListener("click", function () {
+        goTo(i);
+      });
+      dotsWrap.appendChild(dot);
+      return dot;
+    });
+
+    function update() {
+      track.style.transform = "translateX(-" + current * 100 + "%)";
+      dots.forEach(function (dot, i) {
+        dot.classList.toggle("active", i === current);
+      });
+      if (counter) {
+        counter.textContent = current + 1 + " / " + slides.length;
+      }
+    }
+
+    function goTo(index) {
+      current = (index + slides.length) % slides.length;
+      update();
+    }
+
+    if (prevBtn) prevBtn.addEventListener("click", function () { goTo(current - 1); });
+    if (nextBtn) nextBtn.addEventListener("click", function () { goTo(current + 1); });
+
+    /* Touch swipe */
+    var touchStartX = null;
+    track.addEventListener("touchstart", function (e) {
+      touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    track.addEventListener("touchend", function (e) {
+      if (touchStartX === null) return;
+      var delta = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(delta) > 40) {
+        goTo(current + (delta < 0 ? 1 : -1));
+      }
+      touchStartX = null;
+    });
+
+    /* Keyboard navigation when carousel is focused */
+    carousel.setAttribute("tabindex", "0");
+    carousel.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowLeft") goTo(current - 1);
+      if (e.key === "ArrowRight") goTo(current + 1);
+    });
+
+    update();
+  });
+
+  /* ----------------------------------------------------------
      SMOOTH SCROLL for anchor links
      ---------------------------------------------------------- */
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
