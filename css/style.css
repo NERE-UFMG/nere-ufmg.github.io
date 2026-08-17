@@ -769,8 +769,8 @@ html.lang-pt [data-lang="en"] {
 /* Gallery carousel */
 .gallery-carousel {
   position: relative;
-  max-width: 900px;
-  margin: 0 auto;
+  max-width: 560px;
+  margin: 0;
 }
 .gallery-carousel-viewport {
   position: relative;
